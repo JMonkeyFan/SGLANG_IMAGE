@@ -1,5 +1,7 @@
 #!/bin/bash
-
+echo "------------------------------------------"
+echo "I AM ALIVE: STARTING CUSTOM ENTRYPOINT"
+echo "------------------------------------------"
 # 1. Run the library surgery
 echo "Starting library surgery..."
 FILE_AUTO=$(python3 -c "import transformers; print(transformers.models.auto.modeling_auto.__file__)" 2>/dev/null)

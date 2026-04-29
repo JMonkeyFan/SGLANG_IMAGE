@@ -9,11 +9,10 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install flashinfer -i https://flashinfer.ai/whl/cu121/torch2.4/ && \
     pip install --no-cache-dir "sglang[all]==0.5.10.post1" "transformers>=4.45.0" hf-transfer gguf
 
-# Copy your files (including entrypoint.sh)
-COPY . .
+COPY . /
 
-# Make the script executable
-RUN chmod +x /entrypoint.sh
+# Fix Windows line endings and set permissions
+RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
 
-# Set the script as the starting command
-ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
+# Using CMD instead of ENTRYPOINT to ensure it runs after the system init
+CMD ["/bin/bash", "/entrypoint.sh"]
