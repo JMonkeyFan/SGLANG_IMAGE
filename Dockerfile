@@ -10,9 +10,3 @@ RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install --no-cache-dir "sglang[all]==0.5.10.post1" "transformers>=4.45.0" hf-transfer gguf
 
 COPY . /
-
-# Fix Windows line endings and set permissions
-RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh
-
-# Using CMD instead of ENTRYPOINT to ensure it runs after the system init
-CMD ["/bin/bash", "/entrypoint.sh"]
